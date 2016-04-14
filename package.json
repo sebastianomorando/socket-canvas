@@ -1,0 +1,13 @@
+{
+  "name": "morra",
+  "version": "0.0.0",
+  "description": "Rock paper scissor mmorpg",
+  "main": "app.js",
+  "author": "Sebastiano Morando",
+  "private": true,
+  "license": "Paolo",
+  "dependencies": {
+    "express": "4.13.4",
+    "socket.io": "^1.4.5"
+  }
+}
