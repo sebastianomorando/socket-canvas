@@ -1,0 +1,16 @@
+body {
+				background-color: white;
+				padding:0px;
+				margin: 0 auto;
+				border: 0px;
+				overflow: hidden;
+			}
+canvas {
+	-webkit-tap-highlight-color: transparent;
+	overflow: hidden;
+    border: 1px solid black;
+
+	    display: block;
+          margin: 0 auto;
+
+}
