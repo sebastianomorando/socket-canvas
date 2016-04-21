@@ -12,7 +12,10 @@ server.listen(port, function () {
 // Routing
 app.use(express.static(__dirname + '/public'));
 
+//number of past strokes to store in memory
+const MAX_STROKES = 1000;
 var numUsers = 0;
+var strokes = [];
 //here we need a global array to store all touches
 //redis?
 //when the array have more than 1000 touches, we pop the older ones
@@ -24,6 +27,9 @@ io.on('connection', function (socket) {
 
   console.log("Someone connected");
   console.log(numUsers+" connected users");
+
+  //sending all past strokes
+  socket.emit('past strokes', strokes);
 
   //everytime someone send his position information
   //we broadcast all the position information to everyone
@@ -39,6 +45,13 @@ io.on('connection', function (socket) {
      console.log(x+","+y);
      //now i send the position to everyone
      //the broadcast obviously doesn't have memory of past events
+      //remove the first array element if is getting to bigger
+      if (strokes.length > MAX_STROKES) strokes.shift();
+      strokes.push({
+        who : socket.who,
+        x: x,
+        y: y
+      });
       socket.broadcast.emit('draw', {
         who : socket.who,
         x: x,
